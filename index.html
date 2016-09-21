@@ -1,52 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="styles/main.css">
-  <title>Momentous</title>
-</head>
 
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Open+Sans" rel="stylesheet">
+    <title>Momentum</title>
+  </head>
 
-  <!-- MAIN HEADER -->
-  <div class="wrap">
-    <header class="main-header">
-      <a href="#">Links</a>
-      <input type="text" />
+  <body>
 
-  <!-- WEATHER -->
+    <div class="main-container">  <!-- container -->
 
-    </header>
+        <!-- top -->
+        <div class="display-links">
+          <a href="#">Links</a>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input id="search-input" class="header-search" type="text" />
 
-  <!-- TIME -->
-    <div class="container">
-      <section class="container time-greeting">
-      <h1>00:00</h1>
-      <h2>Good evening</h2>
-      </section>
-    </div>
+        </div>
+
+        <!-- WEATHER -->
 
 
-    <!-- MAIN FOCUS INPUT -->
-    <div class"container">
-      <section class="main-focus">
-      <h3>What is your main focus for today?</h3>
-      <input type="text" />
-      </section>
-    </div>
+        <!-- time -->
+        <div class="section-container">
+          <section id="display-greeting" class="container time-greeting">
+          <h1 id="display-time">00:00</h1>
+          </section>
+        </div>
 
+        <!-- main focus input -->
+        <div class="section-container">
+          <section class="main-focus">
+          <h3>What is your main focus for today?</h3>
+          <input class="main-focus" type="text" />
+          </section>
+        </div>
 
-  </div> <!-- WRAP -->
+      <!-- bottom -->
+      <div id="display-location" class="display-location">
+        <a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a>
+        <span id="toggle-location" class="photo">somePlace</span>
+        <span id="toggle-location-info" class="someLocation">Info</span>
+       </div>
 
-  <!-- MAIN FOOTER -->
-  <footer class="main-footer" "cf">
-    <p class="display-location">somePlace</p>
-    <p class="random-quote">Quote here longer text</p>
-    <p class="todo">todo</p>
-  </footer>
+        <div id="display-quote" class="display-quote">
+        <blockquote id="random-quote" class="random-quote">
+          <span id="toggle-quote" class="quote">Quote here longer text</span>
+          <span id="citation" class="citation">Quote by:</span>
+          </blockquote>
+        </div>
 
+        <div class="display-todo">
+        <span>Todo</span>
+        </div>
 
-</body>
+    </div> <!--/container-->
+
+    <script src="https://use.fontawesome.com/7d1af732e4.js"></script>
+    <script src="scripts/scripts.js"></script>
+  </body>
+
 </html>

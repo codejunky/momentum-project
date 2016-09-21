@@ -47,41 +47,137 @@ table {
 ************************/
 
 body {
-  background-image: url("../assets/background.jpg");
+  background: linear-gradient(
+                    rgba(20,20,20, .1),
+                    rgba(20,20,20, .1)),
+  url("../assets/background.jpg");
   background-size: cover;
   color: #fff;
-  position: relative;
+  /*position: relative;*/
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /************************
       BASE LAYOUT
 ************************/
 
-.container {
+.main-container {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.section-container {
+  color: white;
   width: 960px;
   margin: 0 auto;
   text-align: center;
+  text-shadow: 1px 1px 0 #020202;
 }
 .time-greeting {
   margin: 0;
+  color: white;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%)
-
 }
 .main-focus {
+  color: white;
   margin-bottom: 4em;
   margin: 0;
   position: absolute;
   top: 75%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
-.wrap {
-  min-height: calc(100vh - 16px);
+.main-focus input[type="text"] {
+  border: none;
+  outline: none;
+  color: white;
+  width: 480px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0);
+  text-align: center;
+  font-size: 28px;
+  display: block;
+  border: none;
+  outline: none;
+  padding-top: 60px;
+  border-bottom-color: #fff;
+  border-bottom-style: solid;
+}
+.display-links,
+.display-location,
+.display-quote,
+.display-todo,
+.random-quote{
+  display: flex;
+  align-items: center;
+  position: absolute;
+}
+.display-links {
+  top: 0;
+  left: 0;
+  padding-left: 15px;
+  height: 65px;
+}
+.display-location {
+  height: 65px;
+  vertical-align: bottom;
+  padding-left: 15px;
+  bottom: 0;
+}
+.display-quote {
+  height: 65px;
+  vertical-align: bottom;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  width: 50%;
+  justify-content: center;
+}
+.random-quote {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+.display-todo {
+  height: 65px;
+  vertical-align: bottom;
+  bottom: 0;
+  right: 0;
+  padding-right: 15px;
+}
+.someLocation {
+  position: relative;
+  left: -80px ;
+  visibility: hidden;
+  z-index: 1;
+}
+.citation {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  visibility: hidden;
+}
+
+/************************
+      ANIMATION
+************************/
+
+.visible {
+  visibility: visible;
+  transition: opacity 0.5s linear;
+  transition: transform 0.5s;
+  transform: translate(0, 15px);
+}
+
+.toggleUp {
+  transition: transform 0.5s;
+  transform: translate(0, -15px);
 }
 
 /************************
@@ -102,31 +198,57 @@ body {
 ************************/
 
 h1 {
-  font-size: 6em;
+  font-size: 11em;
 }
 h2 {
-  font-size: 3em;
+  font-size: 4em;
 }
 h3 {
   font-size: 2em;
 }
 
 /************************
-    MAIN FOOTER
+       LINKS
 ************************/
 
-.main-footer {
-  text-align: center;
+a {
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  margin-right: 15px;
 }
-.main-footer p {
-  display: inline-block;
+a:hover {
+  color: #fff;
 }
-.display-location {
-  float: left;
+
+/************************
+      Search
+************************/
+
+.header-search {
+  height: 60px;
+  padding: 20px 2px 20px 5px;
+  z-index: 2;
+  background: 0 0;
+  border: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #fff;
+  line-height: 20px;
+  outline: 0;
+  width: 150px;
+  height: 25px;
 }
-.random-quote {
-  text-align: center;
+i {
+  padding-right: 10px;
 }
-.todo {
-  float: right;
+.display-links input:focus {
+  border-bottom: 2px solid white;
+}
+
+/************************
+      Footer
+************************/
+
+fa:hover {
+  color: blue;
 }
