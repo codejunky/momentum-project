@@ -1,6 +1,10 @@
 /**********************************************
-* get user's location if geolocation is enabled
+* Try and get the user's location.
+* If geoloaction is supported return a Promise
+* that either resolves to the user's cooridantes
+* or sends back an error.
 ***********************************************/
+
 function getUserLocation() {
   if ("geolocation" in navigator) {
     //A Promise represents a value which may be available now, or in the future, or never.
@@ -8,26 +12,19 @@ function getUserLocation() {
     return new Promise(function(resolve, reject) {
       navigator.geolocation.getCurrentPosition(function (position) { //if this is successful, the value is passed down to a .then function
         resolve([position.coords.latitude, position.coords.longitude]);
+      }, function(err) {
+        reject({"error": "Location unkown"});
       });
     });
   } else {
-    console.log("Sorry your browser doesn't support geolocation");
+    console.log("Geolocation is not supported by this browser.");
   }
-}
-
-function returnUserLocationOnSuccess(coords) {
-  return coords;
-}
-
-function weatherInfoLoc() {
-  getUserLocation()
-    .then(returnUserLocationOnSuccess) //coords are returned
-    .then(getWeatherInfo); //api call is made
 }
 
 /********************************************************************
 * api call to get the name of location, temperature, and weather icon
 *********************************************************************/
+
 function getWeatherInfo(coords) {
   var api_key = "d121f5c96a69089c551e68ce0d7ea3a8";
   var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + coords[0] +
@@ -36,10 +33,23 @@ function getWeatherInfo(coords) {
   var info = {};
 
   $.getJSON(url, function(data) {
-    info.name = data.name;  //location 
+    info.name = data.name;  //location
     info.temp = data.main.temp; //temperature
     info.icon = data.weather[0].icon; //weather icon
   });
 
   return info;
+}
+
+/********************************************************************
+* If the user allows location tracking get weather info for
+* his location and display it on the Momentum index page
+*********************************************************************/
+
+function weatherInfoLoc() {
+  getUserLocation()
+    .then(getWeatherInfo) //api call is made
+    .catch(function(err) {
+      return err;
+    });
 }
