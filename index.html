@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway|Open+Sans" rel="stylesheet">
@@ -23,7 +23,10 @@
         </div>
 
         <!-- WEATHER -->
-
+        <div class="weather-info">
+          <p class="temp"><img src="" class="weather-icon"> <span class="temp-value">N/A</span></p>
+          <p class="location">Location unknown</p>
+        </div>
 
         <!-- time -->
         <div class="section-container">
@@ -50,7 +53,7 @@
         <div id="display-quote" class="display-quote">
         <blockquote id="random-quote" class="random-quote">
           <span id="toggle-quote" class="quote">Quote here longer text</span>
-          <span id="citation" class="citation">Quote by:</span>
+          <span id="citation" class="citation">Quote by: </span>
           </blockquote>
         </div>
 
@@ -61,6 +64,8 @@
     </div> <!--/container-->
 
     <script src="https://use.fontawesome.com/7d1af732e4.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script src="scripts/app.js"></script>
   </body>
 </html>

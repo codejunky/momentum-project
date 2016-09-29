@@ -25,20 +25,22 @@ function getUserLocation() {
 * api call to get the name of location, temperature, and weather icon
 *********************************************************************/
 
-function getWeatherInfo(coords) {
-  var api_key = "d121f5c96a69089c551e68ce0d7ea3a8";
-  var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + coords[0] +
-       '&lon=' + coords[1] + '&units=metric&appid=' + api_key;
+function getWeatherInfo(params) {
+  if (params instanceof Array) {
+    var api_key = "d121f5c96a69089c551e68ce0d7ea3a8";
+    var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + params[0] +
+         '&lon=' + params[1] + '&units=metric&appid=' + api_key;
 
-  var info = {};
-
-  $.getJSON(url, function(data) {
-    info.name = data.name;  //location
-    info.temp = data.main.temp; //temperature
-    info.icon = data.weather[0].icon; //weather icon
-  });
-
-  return info;
+    $.getJSON(url, function(data) {
+      var iconUrl = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      $(".weather-icon").attr("src", iconUrl);
+      $(".temp-value").text(Math.round(data.main.temp) + "°C");
+      $(".location").text(data.name)
+    });
+  } else {
+    $(".temp-value").text("N/A");
+    $(".location").text(params.error);
+  }
 }
 
 /********************************************************************
@@ -50,12 +52,12 @@ function weatherInfoLoc() {
   getUserLocation()
     .then(getWeatherInfo) //api call is made
     .catch(function(err) {
-      return err;
+      getWeatherInfo(err);
     });
 }
 
 /*=============================================================================
- * Display user's current local time as well as a Greeting
+ * Determine user's current local time as well as a Greeting
  *============================================================================*/
 
 function getTime() {
@@ -97,6 +99,43 @@ function createGreeting(greeting) {
  displayGreeting.appendChild(greetingElement);
 }
 
+/*=============================================================================
+ * Generate quote
+ *============================================================================*/
+
+var quotes = [
+		{ name: "Betty Reese",
+		  quote: "If you think you are too small to be effective, you have never been in bed with a mosquito."},
+		{ name: "John Rawls",
+		  quote: "The fairest rules are those to which everyone would agree if they did not know how much power they would have."
+		},
+		{ name: "Aristotle",
+		  quote: "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+		},
+		{ name: "Stephen King",
+		  quote: "Any word you have to hunt for in a thesaurus is the wrong word. There are no exceptions to this rule."
+		},
+		{ name:"Jan L.A. van de Snepscheut" ,
+		  quote: "In theory there is no difference between theory and practice. But, in practice, there is."
+		},
+		{ name: "Warren Buffett",
+		  quote: "Price is what you pay. Value is what you get."
+		},
+		{ name: "Gnarls Barkley",
+		  quote: "Everybody is somebody, but nobody wants to be themselves."
+		},
+		{ name: "Thomas Sowell",
+		  quote: "Life does not ask what we want. It presents us with options."
+		}
+	]
+
+var getRandQuote = function(){
+	var rand = Math.floor(Math.random() * (quotes.length - 1)) + 1;
+
+	return [quotes[rand].quote, quotes[rand].name];
+}
+
+// Display the user's current time and a greeting based on that time
 var displayTime = document.getElementById('display-time');
 displayTime.innerHTML = getTime();
 
@@ -147,41 +186,12 @@ quoteHover.addEventListener('mouseenter', function() {
 quoteHover.addEventListener('mouseleave', function() {
  var toggleQuote = document.getElementById('toggle-quote');
  toggleQuote.classList.remove('toggleUp');
-}, false)
+}, false);
 
-/*=============================================================================
- * Generate quote
- *============================================================================*/
+// Display user location and weather info if applicable
+weatherInfoLoc();
 
-var quotes = [
-		{ name: "Betty Reese",
-		  quote: "If you think you are too small to be effective, you have never been in bed with a mosquito."},
-		{ name: "John Rawls",
-		  quote: "The fairest rules are those to which everyone would agree if they did not know how much power they would have."
-		},
-		{ name: "Aristotle",
-		  quote: "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
-		},
-		{ name: "Stephen King",
-		  quote: "Any word you have to hunt for in a thesaurus is the wrong word. There are no exceptions to this rule."
-		},
-		{ name:"Jan L.A. van de Snepscheut" ,
-		  quote: "In theory there is no difference between theory and practice. But, in practice, there is."
-		},
-		{ name: "Warren Buffett",
-		  quote: "Price is what you pay. Value is what you get."
-		},
-		{ name: "Gnarls Barkley",
-		  quote: "Everybody is somebody, but nobody wants to be themselves."
-		},
-		{ name: "Thomas Sowell",
-		  quote: "Life does not ask what we want. It presents us with options."
-		}
-	]
-
-var getRandQuote = function(){
-	var rand = Math.floor(Math.random() * (quotes.length - 1)) + 1;
-	console.log(rand);
-
-	return [quotes[rand].quote, quotes[rand].name];
-}
+// Display random quote
+var quote = getRandQuote();
+$(".quote").text(quote[0]);
+$(".citation").append(quote[1]);

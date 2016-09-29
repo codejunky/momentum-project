@@ -246,6 +246,28 @@ i {
 }
 
 /************************
+      Weather Info;
+************************/
+.weather-info {
+	float: right;
+	margin: 10px;
+	text-align: center;
+}
+
+.weather-info .temp {
+	position: relative;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.temp img.weather-icon {
+	position: absolute;
+	width: 70%;
+	top: -1.2em;
+	left: -20px;
+}
+
+/************************
       Footer
 ************************/
 
